@@ -20,13 +20,24 @@ public class WordPuzzle {
      * is true.
      * Precondition: r and c are valid indexes in blackBoxes
      */
-    public boolean toBeLabeled(int r, int c, boolean [][] blackBoxes){
-        /* to be implemented in part a */
+    public boolean toBeLabeled(int r, int c, boolean [][] blackBoxes) {
+        if(!blackBoxes[r][c]) {
+            boolean topExists;
+            boolean bottomExists;
+            if (r == 0) return true;
+
+                if (!blackBoxes[r][c-1]) topExists = false;
 
 
+                if (!blackBoxes[r-1][c]) bottomExists = false;
 
+            if ((!topExists) || (!bottomExists)) {
+                return true;
+            }
+        }
 
-        return false;    // replace this
+        return false;
+
     }
 
     /* Write the WordPuzzle Constructor.  The constructor should initialize the
@@ -47,7 +58,20 @@ public class WordPuzzle {
      * @param blackBoxes - a 2D array of Boxes
      */
     public WordPuzzle(boolean [][] blackBoxes){
-        /* to be implemented in part b */
+        puzzle = new Box[blackBoxes.length][blackBoxes[0].length];
+        int n = 0;
+
+        for (int i = 0; i < blackBoxes.length; i++) {
+            for (int j = 0; j < blackBoxes[0].length; j++) {
+                if (toBeLabeled(i, j, blackBoxes)) {
+                    puzzle[i][j] = new Box(blackBoxes[i][j], n);
+                    n++;
+                }
+                else  {
+                    puzzle[i][j] = new Box(blackBoxes[i][j], 0);
+                }
+            }
+        }
 
 
 

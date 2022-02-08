@@ -1,5 +1,3 @@
-package com.company;
-
 public class NitalTester {
 
     /** Returns true if and only if every value in arr1 appears in arr2.
