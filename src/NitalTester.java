@@ -51,11 +51,12 @@ public class NitalTester {
      * Postcondition: arr2D is unchanged.
      */
     public static int [] getColumn(int[][] arr2D, int c){
-        /* to be written in part a */
+        int[] arr = new int[arr2D.length];
+        for (int i = 0; i < arr2D.length; i++) {
+            arr[i] = arr2D[i][c];
+        }
 
-
-
-        return new int[1];  //replace this
+        return arr;  //replace this
     }
 
     /* Write the method isNital below.  You must use getColumn,
@@ -68,12 +69,24 @@ public class NitalTester {
      *      square has at least one row.
      */
     public static boolean isNital(int[][] square){
-        /* to be written in part b */
+
+        if (!containsRepeats(square[0])) {
+            for (int r = 0; r < square.length; r++) {
+                if (!hasAllValues(square[0], square[r])) {
+                    return false;
+                }
+                if (!hasAllValues(square[0], getColumn(square, r))) {
+                    return false;
+                }
+
+            }
+        } else {
+            return false;
+        }
 
 
 
-
-        return false;   // replace this
+        return true;   // replace this
     }
 
     public static void main(String[] args){
@@ -104,3 +117,12 @@ public class NitalTester {
 //        System.out.println(containsRepeats(arr5));
     }
 }
+
+/* Output
+true
+true
+false
+false
+false
+false
+ */
