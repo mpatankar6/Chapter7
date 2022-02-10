@@ -21,20 +21,12 @@ public class WordPuzzle {
      * Precondition: r and c are valid indexes in blackBoxes
      */
     public boolean toBeLabeled(int r, int c, boolean [][] blackBoxes) {
-        if(!blackBoxes[r][c]) {
-            boolean topExists;
-            boolean bottomExists;
-            if (r == 0) return true;
-
-                if (!blackBoxes[r][c-1]) topExists = false;
+        if(blackBoxes[r][c]) return false;
+        if (r == 0) return true;
+        if (c == 0) return true;
+        if (blackBoxes[r][c-1] || blackBoxes[r-1][c]) return true;
 
 
-                if (!blackBoxes[r-1][c]) bottomExists = false;
-
-            if ((!topExists) || (!bottomExists)) {
-                return true;
-            }
-        }
 
         return false;
 
@@ -59,7 +51,7 @@ public class WordPuzzle {
      */
     public WordPuzzle(boolean [][] blackBoxes){
         puzzle = new Box[blackBoxes.length][blackBoxes[0].length];
-        int n = 0;
+        int n = 1;
 
         for (int i = 0; i < blackBoxes.length; i++) {
             for (int j = 0; j < blackBoxes[0].length; j++) {
@@ -67,6 +59,7 @@ public class WordPuzzle {
                     puzzle[i][j] = new Box(blackBoxes[i][j], n);
                     n++;
                 }
+
                 else  {
                     puzzle[i][j] = new Box(blackBoxes[i][j], 0);
                 }
